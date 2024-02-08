@@ -10,9 +10,9 @@ class Note with _$Note {
   factory Note({
     required String title,
     required String content,
-    required int Color,
+    required int color,
     required int timestamp,
-    required int? id,
+    int? id,
   }) = _Note;
 
   factory Note.fromJson(Map<String, Object?> json) => _$NoteFromJson(json);

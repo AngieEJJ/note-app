@@ -42,6 +42,7 @@ dependencies:
   get_it: ^7.6.7
   http: ^1.2.0
   sqflite: ^2.3.2
+  sqflite_common_ffi: ^2.1.1+1
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
   build_runner: ^2.4.8
+  test: ^1.24.9
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

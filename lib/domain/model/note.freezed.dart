@@ -22,7 +22,7 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 mixin _$Note {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  int get Color => throw _privateConstructorUsedError;
+  int get color => throw _privateConstructorUsedError;
   int get timestamp => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
-  $Res call({String title, String content, int Color, int timestamp, int? id});
+  $Res call({String title, String content, int color, int timestamp, int? id});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? Color = null,
+    Object? color = null,
     Object? timestamp = null,
     Object? id = freezed,
   }) {
@@ -67,9 +67,9 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      Color: null == Color
-          ? _value.Color
-          : Color // ignore: cast_nullable_to_non_nullable
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as int,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -90,7 +90,7 @@ abstract class _$$NoteImplCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$$NoteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String content, int Color, int timestamp, int? id});
+  $Res call({String title, String content, int color, int timestamp, int? id});
 }
 
 /// @nodoc
@@ -105,7 +105,7 @@ class __$$NoteImplCopyWithImpl<$Res>
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? Color = null,
+    Object? color = null,
     Object? timestamp = null,
     Object? id = freezed,
   }) {
@@ -118,9 +118,9 @@ class __$$NoteImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      Color: null == Color
-          ? _value.Color
-          : Color // ignore: cast_nullable_to_non_nullable
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as int,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -140,9 +140,9 @@ class _$NoteImpl implements _Note {
   _$NoteImpl(
       {required this.title,
       required this.content,
-      required this.Color,
+      required this.color,
       required this.timestamp,
-      required this.id});
+      this.id});
 
   factory _$NoteImpl.fromJson(Map<String, dynamic> json) =>
       _$$NoteImplFromJson(json);
@@ -152,7 +152,7 @@ class _$NoteImpl implements _Note {
   @override
   final String content;
   @override
-  final int Color;
+  final int color;
   @override
   final int timestamp;
   @override
@@ -160,7 +160,7 @@ class _$NoteImpl implements _Note {
 
   @override
   String toString() {
-    return 'Note(title: $title, content: $content, Color: $Color, timestamp: $timestamp, id: $id)';
+    return 'Note(title: $title, content: $content, color: $color, timestamp: $timestamp, id: $id)';
   }
 
   @override
@@ -170,7 +170,7 @@ class _$NoteImpl implements _Note {
             other is _$NoteImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.Color, Color) || other.Color == Color) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
             (identical(other.id, id) || other.id == id));
@@ -179,7 +179,7 @@ class _$NoteImpl implements _Note {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, title, content, Color, timestamp, id);
+      Object.hash(runtimeType, title, content, color, timestamp, id);
 
   @JsonKey(ignore: true)
   @override
@@ -199,9 +199,9 @@ abstract class _Note implements Note {
   factory _Note(
       {required final String title,
       required final String content,
-      required final int Color,
+      required final int color,
       required final int timestamp,
-      required final int? id}) = _$NoteImpl;
+      final int? id}) = _$NoteImpl;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$NoteImpl.fromJson;
 
@@ -210,7 +210,7 @@ abstract class _Note implements Note {
   @override
   String get content;
   @override
-  int get Color;
+  int get color;
   @override
   int get timestamp;
   @override
