@@ -6,13 +6,14 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 //가상의 db인 in-memory 데이터베이스 사용 가능한 라이브러리
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('db test', () async {
     final db = await databaseFactoryFfi.openDatabase(inMemoryDatabasePath);
     //sql문으로 db 생성
     await db.execute(
         'CREATE TABLE note (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, color INTEGER, timestamp INTEGER)');
 
-    final noteDbHelper = NoteDbHelper(db);
+    final noteDbHelper = NoteDbHelper();
 
 
     // insert, getnote 테스트

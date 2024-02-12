@@ -7,7 +7,9 @@ import 'package:note_app/presentation/notes/notes_state.dart';
 class NotesViewModel with ChangeNotifier {
   final NoteRepository repository;
 
-  NotesViewModel(this.repository);
+  NotesViewModel(this.repository) {
+    _loadNotes();
+  } //NotesViewModel이 생성될 때마다 _loadNotes 실행
 
   NotesState _state = NotesState(notes: []);
 
