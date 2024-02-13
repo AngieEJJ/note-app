@@ -29,11 +29,11 @@ class NoteScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            bool? isSaved = await Navigator.push( // isSaved 값을 넘겨준다.
-                context,
-                MaterialPageRoute(builder: (context) => const AddEditNoteScreen()),
+            bool? isSaved = await Navigator.push(
+              context, MaterialPageRoute(
+                builder: (context) => const AddEditNoteScreen()),
             );
-            if (isSaved != null && isSaved) { //null이 아니고 true라면 loadNotes 실행
+            if (isSaved != null && isSaved) {
               viewModel.onEvent(const NotesEvent.loadNotes());
             }
           },
@@ -43,8 +43,34 @@ class NoteScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: state.notes
-                .map((e) => NoteItem(
-                      note: e,
+            // 수정
+                .map((e) => GestureDetector(
+                      onTap: () async {
+                        bool? isSaved = await Navigator.push(
+                          context, MaterialPageRoute(
+                            builder: (context) => AddEditNoteScreen(note: e)),
+                        );
+                        if (isSaved != null && isSaved) {
+                          viewModel.onEvent(const NotesEvent.loadNotes());
+                        }
+                      },
+                      child: NoteItem(
+                        note: e,
+                        onDeleteTap: () {
+                          viewModel.onEvent(NotesEvent.deleteNotes(e));
+                          final snackBar = SnackBar(
+                            content: const Text('노트가 삭제되었습니다'),
+                            action: SnackBarAction(
+                              label: '취소',
+                              onPressed: () {
+                                viewModel
+                                    .onEvent(const NotesEvent.restoreNotes());
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        },
+                      ),
                     ))
                 .toList(),
           ),
