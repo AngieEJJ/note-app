@@ -1,21 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:note_app/domain/model/note.dart';
-import 'package:note_app/domain/repository/note_repository.dart';
+import 'package:note_app/domain/use_case/use_cases.dart';
+import 'package:note_app/domain/util/note_order.dart';
+import 'package:note_app/domain/util/order_type.dart';
 import 'package:note_app/presentation/notes/notes_event.dart';
 import 'package:note_app/presentation/notes/notes_state.dart';
 
 class NotesViewModel with ChangeNotifier {
-  final NoteRepository repository;
+  final UseCases useCases;
 
-  NotesViewModel(this.repository) {
-    _loadNotes();
-  } //NotesViewModel이 생성될 때마다 _loadNotes 실행
-
-  NotesState _state = NotesState(notes: []);
+  NotesState _state = NotesState(notes: [], noteOrder: const NoteOrder.date(OrderType.descending()));
 
   NotesState get state => _state;
 
   Note? _recentlyDeletedNote;
+
+  NotesViewModel(this.useCases) {
+    _loadNotes(); //initState 같은 역할
+  }
 
   void onEvent(NotesEvent event) {
     event.when(
@@ -25,15 +27,13 @@ class NotesViewModel with ChangeNotifier {
   }
 
   Future<void> _loadNotes() async {
-    List<Note> notes = await repository.getNotes();
-    _state = state.copyWith(
-      notes: notes,
-    );
+    List<Note> notes = await useCases.getNotesUseCase(state.noteOrder);
+    _state = state.copyWith(notes: notes);
     notifyListeners();
   }
 
   Future<void> _deleteNote(Note note) async {
-    await repository.deleteNote(note);
+    await useCases.deleteNoteUseCase(note);
     _recentlyDeletedNote = note;
 
     await _loadNotes();
@@ -41,7 +41,7 @@ class NotesViewModel with ChangeNotifier {
 
   Future<void> _restoreNotes() async {
     if (_recentlyDeletedNote != null) {
-      await repository.insertNote(_recentlyDeletedNote!);
+      await useCases.addNoteUseCase(_recentlyDeletedNote!);
       _recentlyDeletedNote = null;
 
       _loadNotes();

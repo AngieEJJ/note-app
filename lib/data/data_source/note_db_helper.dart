@@ -2,6 +2,9 @@ import 'package:note_app/domain/model/note.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NoteDbHelper  {
+  Database db;
+
+  NoteDbHelper(this.db);
 
   // 하나만 get
   Future<Note?> getNoteById(int id) async {
@@ -21,27 +24,23 @@ class NoteDbHelper  {
 
   //모든 리스트 get
   Future<List<Note>> getNotes() async {
-    var db = await openDatabase('note');
     final maps = await db.query('note');
     return maps.map((e) => Note.fromJson(e)).toList(); // 리스트니까
   }
 
   //insert
   Future<void> insertNote(Note note) async {
-    var db = await openDatabase('note');
     await db.insert('note', note.toJson());
   }
 
   //update
   Future<void> updateNote(Note note) async {
-    var db = await openDatabase('note');
     await db
         .update('note', note.toJson(), where: 'id = ?', whereArgs: [note.id]);
   }
 
   //delete
   Future<void> deleteNote(Note note) async {
-    var db = await openDatabase('note');
     await db
         .delete('note', where: 'id = ?', whereArgs: [note.id]);
   }

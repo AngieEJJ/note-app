@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:note_app/data/data_source/note_db_helper.dart';
 import 'package:note_app/domain/model/note.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 //가상의 db인 in-memory 데이터베이스 사용 가능한 라이브러리
@@ -13,7 +12,7 @@ void main() {
     await db.execute(
         'CREATE TABLE note (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, color INTEGER, timestamp INTEGER)');
 
-    final noteDbHelper = NoteDbHelper();
+    final noteDbHelper = NoteDbHelper(db);
 
 
     // insert, getnote 테스트
